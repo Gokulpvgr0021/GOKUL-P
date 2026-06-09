@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY BIRTHDAY AMMA! 🎉</title>
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d;
+            color: #f5f5f5;
+            font-family: 'Courier New', Courier, monospace; /* Retro 90s vibe */
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #1a1a1a;
+            padding-top: 20px;
+            border-right: 2px solid #ffd700;
+            overflow-y: auto;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            background: none;
+            color: white;
+            padding: 15px;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            border-bottom: 1px solid #333;
+        }
+        .sidebar button:hover {
+            background-color: #ffd700;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Main Content Area */
+        .content {
+            margin-left: 250px;
+            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            display: none; /* Hides all pages by default */
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .active {
+            display: block; /* Shows the active page */
+        }
+
+        /* Cinematic Styling */
+        h1 {
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 3em;
+            text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .cinematic-box {
+            background: #222;
+            padding: 20px;
+            border: 1px solid #444;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            margin-top: 20px;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #333;
+            border: 2px dashed #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #888;
+        }
+
+        .crazy-btn {
+            background: linear-gradient(45deg, #ff0055, #ffcc00);
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <h3 style="color:#ffd700; text-align:center;">Gokul's Gift</h3>
+        <button onclick="showPage('page1')">1. The Big Welcome</button>
+        <button onclick="showPage('page2')">2. Cinematic Masterpieces</button>
+        <button onclick="showPage('page3')">3. 90s Retro Memories</button>
+        <button onclick="showPage('page4')">4. Top Secret Crazy Story</button>
+        <button onclick="showPage('page5')">5. Reasons I Love You</button>
+        <!-- Placeholders for Pages 6-15 -->
+        <button onclick="showPage('page6')">6. Favorite Food Moments</button>
+        <button onclick="showPage('page7')">7. Funny Quotes</button>
+        <button onclick="showPage('page8')">8. Family Trips</button>
+        <button onclick="showPage('page9')">9. Wisdom You Taught Me</button>
+        <button onclick="showPage('page10')">10. Oops, My Bad!</button>
+        <button onclick="showPage('page11')">11. Mom's Superpowers</button>
+        <button onclick="showPage('page12')">12. Playlist for Mom</button>
+        <button onclick="showPage('page13')">13. Future Plans</button>
+        <button onclick="showPage('page14')">14. Messages from Friends</button>
+        <button onclick="showPage('page15')">15. The Grand Finale</button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+
+        <!-- PAGE 1: Home -->
+        <div id="page1" class="page active">
+            <h1>HAPPY BIRTHDAY AMMA! 👑</h1>
+            <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
+            <button class="crazy-btn" onclick="fireConfetti()">Click For a Crazy Surprise!</button>
+        </div>
+
+        <!-- PAGE 2: Cinematic Edits -->
+        <div id="page2" class="page">
+            <h1>Cinematic Masterpieces</h1>
+            <div class="cinematic-box">
+                <p>Some of the best shots of you. You look like a movie star in these!</p>
+                <div class="photo-placeholder">[Replace with your 8K Terrace Portrait image code here]</div>
+                <div class="photo-placeholder">[Replace with Family Portrait image code here]</div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: 90s Retro -->
+        <div id="page3" class="page">
+            <h1>90s Vintage Memories</h1>
+            <p style="font-family: 'Times New Roman', Times, serif; font-size: 22px; color: #ccc;">
+                Taking it back to the golden era. Look at these classic moments!
+            </p>
+            <div class="photo-placeholder" style="filter: sepia(0.8) contrast(1.2);">[Insert Old Scanned Photo Here]</div>
+        </div>
+
+        <!-- PAGE 4-15: Placeholders -->
+        <div id="page4" class="page">
+            <h1>Top Secret Story</h1>
+            <p>Write that crazy, funny story you two always laugh about right here.</p>
+        </div>
+        
+        <div id="page5" class="page">
+            <h1>Reasons You're the Best</h1>
+            <ul style="text-align: left; font-size: 20px; line-height: 1.8;">
+                <li>You always support my wild ideas.</li>
+                <li>Your cooking is legendary.</li>
+                <li>Write more reasons here...</li>
+            </ul>
+        </div>
+
+        <!-- You can copy this block below and change the ID to page6, page7, up to page15 -->
+        <div id="page15" class="page">
+            <h1>The Grand Finale</h1>
+            <p>Happy Birthday Mom! I love you so much. - Gokul</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to switch between the 15 pages
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Crazy Confetti Function!
+        function fireConfetti() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffd700']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffd700']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
