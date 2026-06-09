@@ -64,7 +64,7 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            transition: background 0.8s ease; /* Smooth background transition */
+            transition: background 0.8s ease;
         }
 
         /* 🎨 THEME SWITCHER MENU 🎨 */
@@ -252,6 +252,7 @@
             cursor: pointer;
             box-shadow: 0 0 20px var(--glow-color);
             margin-top: 20px;
+            margin-bottom: 50px; /* ADDED SPACE UNDER THE BUTTON */
             transition: 0.5s;
             font-weight: 700;
             font-family: var(--cursive-font);
@@ -323,6 +324,7 @@
             display: inline-block;
             margin-top: 20px;
             box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+            margin-bottom: 50px; /* Added spacing here too for consistency */
         }
 
         /* Custom Scrollbar */
@@ -336,7 +338,7 @@
             body { flex-direction: column; }
             .theme-switcher { 
                 top: auto; 
-                bottom: 20px; /* Moved to bottom on mobile so it doesn't block titles */
+                bottom: 20px; 
                 right: 20px; 
             }
             .sidebar {
@@ -351,8 +353,8 @@
             h1 { font-size: 3rem; }
             p { font-size: 1.5rem; }
             #page6 h1 { font-size: 3.5rem !important; margin-top: 40px !important; }
-            .reasons-list { padding: 20px 25px; font-size: 1.5rem; }
-            .photo-placeholder { width: 100%; max-width: 280px; height: 280px; }
+            .reasons-list { padding: 20px 25px; font-size: 1.5rem; margin-bottom: 60px; }
+            .photo-placeholder { width: 100%; max-width: 280px; height: 280px; margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -394,7 +396,7 @@
                 </div>
             </div>
 
-            <!-- BUTTON NOW TRIGGERS THE CELEBRATION FUNCTION -->
+            <!-- BUTTON NOW HAS ADDED MARGIN BELOW IT -->
             <button class="crazy-btn" onclick="celebrate()">Click pannu maa! 🎉</button>
         </div>
 
@@ -446,7 +448,7 @@
         <div id="page6" class="page">
             <h1 style="margin-top: 100px;">The Grand Finale ✨</h1>
             <p style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: var(--primary);">- Gokul</b></p>
-            <!-- BUTTON HERE ALSO TRIGGERS CELEBRATION -->
+            <!-- BUTTON HERE ALSO HAS ADDED MARGIN BELOW IT -->
             <button class="crazy-btn" onclick="celebrate()">One more time! 🎊</button>
         </div>
 
@@ -455,7 +457,6 @@
     <script>
         // 🎨 THEME SWITCHER LOGIC 🎨
         function setTheme(themeName) {
-            // Apply the selected theme to the body
             if (themeName === 'default') {
                 document.body.removeAttribute('data-theme');
             } else {
@@ -513,11 +514,9 @@
 
         // 🎉 MASTER CELEBRATION FUNCTION 🎉
         function celebrate() {
-            // 1. Fire Confetti
             var duration = 3000;
             var end = Date.now() + duration;
 
-            // Get current theme colors for confetti if possible, or use standard brights
             var colors = ['#ffffff', '#ffd700'];
             var theme = document.body.getAttribute('data-theme');
             if(theme === 'rose') colors.push('#d81b60');
@@ -546,7 +545,6 @@
                 }
             }());
 
-            // 2. Start Flower Shower Burst
             let flowerBurst = setInterval(createFlower, 100); 
 
             setTimeout(() => {
