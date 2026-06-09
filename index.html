@@ -33,6 +33,36 @@
             overflow: hidden;
         }
 
+        /* Flower Shower Animation */
+        #flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Lets you click buttons through the flowers */
+            z-index: 10;
+            display: none;
+            overflow: hidden;
+        }
+
+        #flower-container.active {
+            display: block;
+        }
+
+        .flower {
+            position: absolute;
+            top: -10%;
+            animation: fall linear forwards;
+            opacity: 0.85;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg) translateX(0); }
+            100% { transform: translateY(115vh) rotate(360deg) translateX(50px); }
+        }
+
         /* Glassmorphism Sidebar (Desktop) */
         .sidebar {
             width: 280px;
@@ -46,6 +76,7 @@
             gap: 8px;
             box-shadow: 5px 0 25px rgba(0,0,0,0.2);
             flex-shrink: 0;
+            z-index: 20;
         }
 
         .sidebar h3 {
@@ -88,6 +119,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 15;
         }
 
         .page {
@@ -106,7 +139,7 @@
             font-family: 'Playfair Display', serif;
             color: var(--primary);
             font-size: 3.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
         }
 
@@ -126,7 +159,7 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
-            margin-top: 30px;
+            margin-top: 20px;
             transition: transform 0.2s, box-shadow 0.2s;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
@@ -143,7 +176,7 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
         .photo-placeholder {
@@ -156,7 +189,7 @@
             align-items: center;
             justify-content: center;
             color: #aaa;
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s, background 0.3s, border-color 0.3s;
             backdrop-filter: blur(5px);
             overflow: hidden; 
         }
@@ -213,21 +246,20 @@
            ========================================= */
         @media screen and (max-width: 768px) {
             body {
-                flex-direction: column; /* Stack sidebar on top of content */
+                flex-direction: column; 
             }
 
-            /* Convert Sidebar into a Swipeable Top Navigation */
             .sidebar {
                 width: 100%;
                 height: auto;
-                flex-direction: row; /* Horizontal layout */
+                flex-direction: row; 
                 align-items: center;
                 padding: 15px 10px;
                 border-right: none;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                overflow-x: auto; /* Allow swiping side to side */
+                overflow-x: auto; 
                 overflow-y: hidden;
-                white-space: nowrap; /* Keep buttons in one line */
+                white-space: nowrap; 
             }
 
             .sidebar h3 {
@@ -241,20 +273,17 @@
                 padding: 10px 15px;
                 margin-right: 8px;
                 font-size: 0.9rem;
-                flex-shrink: 0; /* Prevent buttons from squishing */
+                flex-shrink: 0; 
             }
 
-            /* Remove hover transform on mobile to prevent glitching */
             .sidebar button:hover, .sidebar button.active-btn {
                 transform: none; 
             }
 
-            /* Adjust Main Content for Mobile */
             .content {
                 padding: 25px 15px;
             }
 
-            /* Scale down Typography */
             h1 {
                 font-size: 2.2rem;
             }
@@ -263,19 +292,16 @@
                 font-size: 1rem;
             }
 
-            /* Make Grand Finale Text Fit */
             #page6 h1 {
                 font-size: 2.5rem !important;
                 margin-top: 40px !important;
             }
 
-            /* Adjust Reason List Padding */
             .reasons-list {
                 padding: 20px 25px;
                 font-size: 1rem;
             }
 
-            /* Make Photos Responsive */
             .photo-placeholder {
                 width: 100%;
                 max-width: 280px;
@@ -285,6 +311,9 @@
     </style>
 </head>
 <body>
+
+    <!-- OVERLAY FOR FLOWER SHOWER -->
+    <div id="flower-container" class="active"></div>
 
     <!-- SIDEBAR NAVIGATION -->
     <div class="sidebar">
@@ -300,10 +329,18 @@
     <!-- MAIN CONTENT -->
     <div class="content">
 
-        <!-- PAGE 1: Home -->
+        <!-- PAGE 1: Home (Now with Image & Flowers!) -->
         <div id="page1" class="page active">
             <h1>HAPPY BIRTHDAY AMMA! 👑</h1>
             <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
+            
+            <!-- Added PVGR.png Image -->
+            <div class="photo-gallery" style="margin-bottom: 25px;">
+                <div class="photo-placeholder" style="width: 220px; height: 260px; border-color: #ff0055;">
+                    <img src="PVGR.png" alt="Amma Welcome Photo" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing PVGR.png';">
+                </div>
+            </div>
+
             <button class="crazy-btn" onclick="fireConfetti()">Click pannu maa! 🎉</button>
         </div>
 
@@ -361,6 +398,34 @@
     </div>
 
     <script>
+        let flowerInterval; // Variable to control the flower shower
+
+        // Function to create a single falling flower
+        function createFlower() {
+            const container = document.getElementById('flower-container');
+            if (!container || !container.classList.contains('active')) return;
+            
+            const flower = document.createElement('div');
+            // Array of beautiful emojis for the shower
+            const flowers = ['🌸', '🌺', '🌼', '🌻', '🌹', '💮', '✨'];
+            flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.classList.add('flower');
+            
+            // Randomize position, size, and speed
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            const duration = Math.random() * 3 + 3; // Fall between 3 to 6 seconds
+            flower.style.animationDuration = duration + 's';
+            
+            container.appendChild(flower);
+            
+            // Clean up flower after it falls off screen
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+
+        // Navigation Function
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
@@ -375,10 +440,29 @@
             document.getElementById(pageId).classList.add('active');
             document.getElementById('btn-' + pageId).classList.add('active-btn');
             
-            // On mobile, automatically scroll the content to the top when a new tab is clicked
+            // Mobile: Scroll back to top
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+
+            // FLOWER SHOWER LOGIC: Only show flowers on Page 1
+            const flowerContainer = document.getElementById('flower-container');
+            if (pageId === 'page1') {
+                flowerContainer.classList.add('active');
+                if (!flowerInterval) {
+                    flowerInterval = setInterval(createFlower, 300); // Create a flower every 300ms
+                }
+            } else {
+                flowerContainer.classList.remove('active');
+                clearInterval(flowerInterval);
+                flowerInterval = null;
+            }
         }
 
+        // Start flower shower when the website first loads!
+        window.onload = () => {
+            flowerInterval = setInterval(createFlower, 300);
+        };
+
+        // Confetti Engine
         function fireConfetti() {
             var duration = 3000;
             var end = Date.now() + duration;
