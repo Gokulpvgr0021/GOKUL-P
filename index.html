@@ -111,7 +111,7 @@
             100% { transform: scale(1.5) rotate(90deg) translateY(-20px); opacity: 0; }
         }
 
-        /* 🌸 FLOWER SHOWER 🌸 */
+        /* 🌸 FLOWER & PHOTO SHOWER 🌸 */
         #flower-container {
             position: fixed;
             top: 0;
@@ -134,9 +134,31 @@
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
         }
 
+        /* 📸 Falling Photo Styles 📸 */
+        .falling-photo {
+            position: absolute;
+            top: -20%;
+            width: 80px; 
+            height: 100px;
+            object-fit: cover;
+            border: 5px solid white; /* Polaroid look */
+            border-bottom-width: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border-radius: 2px;
+            animation: photoFall linear forwards;
+            opacity: 0.95;
+            z-index: 11;
+        }
+
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg) translateX(0); }
             100% { transform: translateY(115vh) rotate(360deg) translateX(50px); }
+        }
+
+        @keyframes photoFall {
+            0% { transform: translateY(0) rotate(-15deg) translateX(0) scale(1); }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(80px) scale(1.2); }
+            100% { transform: translateY(120vh) rotate(360deg) translateX(-50px) scale(1); }
         }
 
         /* Glassmorphism Sidebar */
@@ -252,7 +274,7 @@
             cursor: pointer;
             box-shadow: 0 0 20px var(--glow-color);
             margin-top: 20px;
-            margin-bottom: 50px; /* ADDED SPACE UNDER THE BUTTON */
+            margin-bottom: 50px; /* Space under the button */
             transition: 0.5s;
             font-weight: 700;
             font-family: var(--cursive-font);
@@ -324,7 +346,7 @@
             display: inline-block;
             margin-top: 20px;
             box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-            margin-bottom: 50px; /* Added spacing here too for consistency */
+            margin-bottom: 50px; 
         }
 
         /* Custom Scrollbar */
@@ -368,7 +390,7 @@
         <button onclick="setTheme('forest')" title="Enchanted Forest">🌲</button>
     </div>
 
-    <!-- OVERLAY FOR FLOWER SHOWER -->
+    <!-- OVERLAY FOR SHOWER EFFECTS -->
     <div id="flower-container" class="active"></div>
 
     <!-- SIDEBAR NAVIGATION -->
@@ -396,7 +418,7 @@
                 </div>
             </div>
 
-            <!-- BUTTON NOW HAS ADDED MARGIN BELOW IT -->
+            <!-- BUTTON TRIGGERS CONFETTI, FLOWERS, & PHOTOS! -->
             <button class="crazy-btn" onclick="celebrate()">Click pannu maa! 🎉</button>
         </div>
 
@@ -448,7 +470,6 @@
         <div id="page6" class="page">
             <h1 style="margin-top: 100px;">The Grand Finale ✨</h1>
             <p style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: var(--primary);">- Gokul</b></p>
-            <!-- BUTTON HERE ALSO HAS ADDED MARGIN BELOW IT -->
             <button class="crazy-btn" onclick="celebrate()">One more time! 🎊</button>
         </div>
 
@@ -512,6 +533,33 @@
             setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
+        // 📸 PHOTO SHOWER CREATOR FUNCTION 📸
+        function createFallingPhoto() {
+            const container = document.getElementById('flower-container');
+            if (!container) return;
+
+            const img = document.createElement('img');
+            // Array of the images you uploaded to be used in the shower
+            const photos = ['PVGR.png', 'Viji.png', 'img1.png'];
+            img.src = photos[Math.floor(Math.random() * photos.length)];
+            img.classList.add('falling-photo');
+
+            // If an image doesn't exist, just remove it so it doesn't show a broken box
+            img.onerror = function() { this.remove(); };
+
+            // Randomize starting position across the screen
+            img.style.left = Math.random() * 90 + 'vw';
+            
+            // Randomize falling speed (slightly slower than flowers so they can be seen!)
+            const duration = Math.random() * 3 + 4; 
+            img.style.animationDuration = duration + 's';
+            
+            container.appendChild(img);
+            
+            // Clean up image after it falls off screen
+            setTimeout(() => { img.remove(); }, duration * 1000);
+        }
+
         // 🎉 MASTER CELEBRATION FUNCTION 🎉
         function celebrate() {
             var duration = 3000;
@@ -524,6 +572,7 @@
             else if(theme === 'forest') colors.push('#40916c');
             else colors.push('#ff0055');
 
+            // 1. Fire Confetti
             (function frame() {
                 confetti({
                     particleCount: 5,
@@ -545,10 +594,16 @@
                 }
             }());
 
+            // 2. Start Flower Shower (Many flowers rapidly)
             let flowerBurst = setInterval(createFlower, 100); 
 
+            // 3. Start Photo Shower (A few photos drifting down)
+            let photoBurst = setInterval(createFallingPhoto, 350); 
+
+            // Stop generating new falling items after 4 seconds
             setTimeout(() => {
                 clearInterval(flowerBurst);
+                clearInterval(photoBurst);
             }, 4000);
         }
 
