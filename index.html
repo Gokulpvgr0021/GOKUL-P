@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Amma! 🎉</title>
     
     <!-- Importing the Confetti Library -->
@@ -19,6 +19,10 @@
             --text-light: #f8f9fa;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
@@ -29,7 +33,7 @@
             overflow: hidden;
         }
 
-        /* Glassmorphism Sidebar */
+        /* Glassmorphism Sidebar (Desktop) */
         .sidebar {
             width: 280px;
             background: rgba(255, 255, 255, 0.05);
@@ -41,6 +45,7 @@
             flex-direction: column;
             gap: 8px;
             box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
 
         .sidebar h3 {
@@ -142,7 +147,7 @@
         }
 
         .photo-placeholder {
-            width: 250px; /* Made slightly wider for better photo display */
+            width: 250px; 
             height: 300px;
             background: rgba(255, 255, 255, 0.05);
             border: 2px dashed rgba(255, 215, 0, 0.4);
@@ -153,7 +158,7 @@
             color: #aaa;
             transition: transform 0.3s, background 0.3s;
             backdrop-filter: blur(5px);
-            overflow: hidden; /* This keeps the images inside the rounded borders */
+            overflow: hidden; 
         }
 
         .photo-placeholder:hover {
@@ -162,11 +167,10 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* The Magic Image Fitting CSS */
         .photo-placeholder img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* This makes the image fill the box without squishing */
+            object-fit: cover; 
             display: block;
         }
 
@@ -177,7 +181,7 @@
             border-radius: 4px;
             background: #e6ddc5;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-            border-bottom: 40px solid #f4eedc; /* Polaroid style */
+            border-bottom: 40px solid #f4eedc; 
         }
 
         /* Beautiful Lists */
@@ -199,10 +203,85 @@
         }
 
         /* Custom Scrollbar for elegance */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
         ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.6); }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS RULES
+           ========================================= */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack sidebar on top of content */
+            }
+
+            /* Convert Sidebar into a Swipeable Top Navigation */
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row; /* Horizontal layout */
+                align-items: center;
+                padding: 15px 10px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                overflow-x: auto; /* Allow swiping side to side */
+                overflow-y: hidden;
+                white-space: nowrap; /* Keep buttons in one line */
+            }
+
+            .sidebar h3 {
+                margin: 0 15px 0 5px;
+                font-size: 1.3rem;
+                display: inline-block;
+            }
+
+            .sidebar button {
+                display: inline-block;
+                padding: 10px 15px;
+                margin-right: 8px;
+                font-size: 0.9rem;
+                flex-shrink: 0; /* Prevent buttons from squishing */
+            }
+
+            /* Remove hover transform on mobile to prevent glitching */
+            .sidebar button:hover, .sidebar button.active-btn {
+                transform: none; 
+            }
+
+            /* Adjust Main Content for Mobile */
+            .content {
+                padding: 25px 15px;
+            }
+
+            /* Scale down Typography */
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            /* Make Grand Finale Text Fit */
+            #page6 h1 {
+                font-size: 2.5rem !important;
+                margin-top: 40px !important;
+            }
+
+            /* Adjust Reason List Padding */
+            .reasons-list {
+                padding: 20px 25px;
+                font-size: 1rem;
+            }
+
+            /* Make Photos Responsive */
+            .photo-placeholder {
+                width: 100%;
+                max-width: 280px;
+                height: 280px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -215,7 +294,7 @@
         <button id="btn-page3" onclick="showPage('page3')">3. Memories...📸</button>
         <button id="btn-page4" onclick="showPage('page4')">4. 🤣🤣🤣</button>
         <button id="btn-page5" onclick="showPage('page5')">5. Reasons I Love You</button>
-        <button id="btn-page15" onclick="showPage('page15')">15. The Grand Finale</button>
+        <button id="btn-page6" onclick="showPage('page6')">6. The Grand Finale</button>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -228,12 +307,11 @@
             <button class="crazy-btn" onclick="fireConfetti()">Click pannu maa! 🎉</button>
         </div>
 
-        <!-- PAGE 2: Cinematic Edits -->
+        <!-- PAGE 2: Surprise -->
         <div id="page2" class="page">
             <h1>Surprise</h1>
             <p>Some of the best shots of you. You look like a movie star in these!</p>
             <div class="photo-gallery">
-                <!-- Using real image tags now. Replace 'PVGR.png' with your actual file name if different -->
                 <div class="photo-placeholder">
                     <img src="PVGR.png" alt="Amma 1" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing PVGR.png';">
                 </div>
@@ -243,10 +321,10 @@
             </div>
         </div>
 
-        <!-- PAGE 3: 90s Retro -->
+        <!-- PAGE 3: Memories -->
         <div id="page3" class="page">
             <h1>Memories...📸</h1>
-            <p style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ccc; font-style: italic;">
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #ccc; font-style: italic;">
                 Taking it back to the golden era. Look at these classic moments!
             </p>
             <div class="photo-gallery">
@@ -256,7 +334,7 @@
             </div>
         </div>
 
-        <!-- PAGE 4: Crazy Story -->
+        <!-- PAGE 4: Funny Story -->
         <div id="page4" class="page">
             <h1>🤣🤣🤣</h1>
             <p>Remember that time when... (write your funny story here!)</p>
@@ -273,11 +351,8 @@
             </ul>
         </div>
 
-        <!-- PAGES 6 to 14 -->
-        
-
-        <!-- PAGE 15: Finale -->
-        <div id="page15" class="page">
+        <!-- PAGE 6: Finale -->
+        <div id="page6" class="page">
             <h1 style="font-size: 4rem; margin-top: 100px;">The Grand Finale ✨</h1>
             <p style="font-size: 1.5rem;">Happy Birthday Mom! I love you so much.<br><br><b>- Gokul</b></p>
             <button class="crazy-btn" onclick="fireConfetti()">One more time! 🎊</button>
@@ -286,28 +361,24 @@
     </div>
 
     <script>
-        // Function to switch between the 15 pages smoothly
         function showPage(pageId) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Remove active glow from all sidebar buttons
             const buttons = document.querySelectorAll('.sidebar button');
             buttons.forEach(btn => {
                 btn.classList.remove('active-btn');
             });
 
-            // Show the selected page
             document.getElementById(pageId).classList.add('active');
-            
-            // Highlight the clicked button
             document.getElementById('btn-' + pageId).classList.add('active-btn');
+            
+            // On mobile, automatically scroll the content to the top when a new tab is clicked
+            document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Crazy Confetti Function
         function fireConfetti() {
             var duration = 3000;
             var end = Date.now() + duration;
