@@ -12,12 +12,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Base Theme Settings */
+        /* Base Theme Settings (Variables) */
         :root {
-            --primary: #ffd700; /* Gold */
+            /* DEFAULT: Magical Night (Purple/Gold) */
+            --primary: #ffd700; 
             --bg-gradient: linear-gradient(135deg, #1a0b2e 0%, #4b1958 100%);
             --text-light: #f8f9fa;
+            --btn-bg: linear-gradient(45deg, #ff0055, #ff7700, #ff0055);
+            --glow-color: rgba(255, 0, 85, 0.6);
+            --glow-color-strong: rgba(255, 0, 85, 0.9);
             --cursive-font: 'Dancing Script', cursive;
+        }
+
+        /* THEME 2: Rose Petal */
+        [data-theme="rose"] {
+            --primary: #ffd1dc;
+            --bg-gradient: linear-gradient(135deg, #3d0014 0%, #8a1c3e 100%);
+            --btn-bg: linear-gradient(45deg, #d81b60, #f06292, #d81b60);
+            --glow-color: rgba(216, 27, 96, 0.6);
+            --glow-color-strong: rgba(216, 27, 96, 0.9);
+        }
+
+        /* THEME 3: Ocean Dream */
+        [data-theme="ocean"] {
+            --primary: #a8dadc;
+            --bg-gradient: linear-gradient(135deg, #001a2c 0%, #0f4c5c 100%);
+            --btn-bg: linear-gradient(45deg, #00b4d8, #48cae4, #00b4d8);
+            --glow-color: rgba(0, 180, 216, 0.6);
+            --glow-color-strong: rgba(0, 180, 216, 0.9);
+        }
+
+        /* THEME 4: Enchanted Forest */
+        [data-theme="forest"] {
+            --primary: #d8f3dc;
+            --bg-gradient: linear-gradient(135deg, #081c15 0%, #2d6a4f 100%);
+            --btn-bg: linear-gradient(45deg, #40916c, #74c69d, #40916c);
+            --glow-color: rgba(64, 145, 108, 0.6);
+            --glow-color-strong: rgba(64, 145, 108, 0.9);
         }
 
         * {
@@ -33,6 +64,36 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
+            transition: background 0.8s ease; /* Smooth background transition */
+        }
+
+        /* 🎨 THEME SWITCHER MENU 🎨 */
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .theme-switcher button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 0;
+        }
+
+        .theme-switcher button:hover {
+            transform: scale(1.3);
         }
 
         /* ✨ MAGIC CURSOR SPARKLES ✨ */
@@ -42,7 +103,7 @@
             z-index: 9999;
             font-size: 1.2rem;
             animation: magicFade 0.8s forwards;
-            filter: drop-shadow(0 0 8px #ffd700);
+            filter: drop-shadow(0 0 8px var(--primary));
         }
 
         @keyframes magicFade {
@@ -63,9 +124,7 @@
             overflow: hidden;
         }
 
-        #flower-container.active {
-            display: block;
-        }
+        #flower-container.active { display: block; }
 
         .flower {
             position: absolute;
@@ -125,11 +184,11 @@
         }
 
         .sidebar button:hover, .sidebar button.active-btn {
-            background: rgba(255, 215, 0, 0.15);
-            border: 1px solid rgba(255, 215, 0, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
             color: var(--primary);
             transform: translateX(5px);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            box-shadow: inset 0 0 10px var(--glow-color);
         }
 
         /* Main Content Area */
@@ -152,9 +211,7 @@
             animation: magicalFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .page.active {
-            display: block;
-        }
+        .page.active { display: block; }
 
         @keyframes magicalFadeIn {
             0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
@@ -172,8 +229,8 @@
         }
 
         @keyframes magicalTextGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2); }
-            100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 0, 85, 0.6), 0 0 40px rgba(255, 0, 85, 0.4); }
+            0% { text-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255, 255, 255, 0.2); }
+            100% { text-shadow: 0 0 20px var(--primary), 0 0 30px var(--glow-color), 0 0 40px var(--glow-color); }
         }
 
         p {
@@ -185,7 +242,7 @@
 
         /* Magical Button */
         .crazy-btn {
-            background: linear-gradient(45deg, #ff0055, #ff7700, #ff0055);
+            background: var(--btn-bg);
             background-size: 200% auto;
             color: white;
             border: none;
@@ -193,7 +250,7 @@
             font-size: 1.8rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+            box-shadow: 0 0 20px var(--glow-color);
             margin-top: 20px;
             transition: 0.5s;
             font-weight: 700;
@@ -204,7 +261,7 @@
         .crazy-btn:hover {
             background-position: right center;
             transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.9);
+            box-shadow: 0 10px 30px var(--glow-color-strong);
         }
 
         @keyframes gradientShine {
@@ -225,7 +282,7 @@
             width: 250px; 
             height: 300px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 215, 0, 0.6);
+            border: 2px dashed var(--primary);
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -239,19 +296,12 @@
 
         .photo-placeholder:hover {
             transform: translateY(-15px) scale(1.03);
-            border-color: var(--primary);
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 30px var(--glow-color);
             border-style: solid;
         }
 
-        .photo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            display: block;
-        }
+        .photo-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* 90s Retro Specific Frame */
         .retro-photo {
             filter: sepia(0.8) contrast(1.2);
             border: 12px solid #f4eedc;
@@ -261,7 +311,6 @@
             border-bottom: 40px solid #f4eedc; 
         }
 
-        /* Beautiful Lists */
         .reasons-list {
             text-align: left;
             font-size: 1.8rem;
@@ -273,31 +322,27 @@
             border-left: 4px solid var(--primary);
             display: inline-block;
             margin-top: 20px;
-            box-shadow: inset 0 0 20px rgba(255,215,0,0.1);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.4); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.8); box-shadow: 0 0 10px #ffd700; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; opacity: 0.5; }
+        ::-webkit-scrollbar-thumb:hover { box-shadow: 0 0 10px var(--primary); }
 
-        /* =========================================
-           MOBILE RESPONSIVENESS RULES
-           ========================================= */
+        /* MOBILE RESPONSIVENESS RULES */
         @media screen and (max-width: 768px) {
             body { flex-direction: column; }
+            .theme-switcher { 
+                top: auto; 
+                bottom: 20px; /* Moved to bottom on mobile so it doesn't block titles */
+                right: 20px; 
+            }
             .sidebar {
-                width: 100%;
-                height: auto;
-                flex-direction: row; 
-                align-items: center;
-                padding: 15px 10px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                overflow-x: auto; 
-                overflow-y: hidden;
-                white-space: nowrap; 
+                width: 100%; height: auto; flex-direction: row; align-items: center;
+                padding: 15px 10px; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                overflow-x: auto; overflow-y: hidden; white-space: nowrap; 
             }
             .sidebar h3 { margin: 0 15px 0 5px; font-size: 1.8rem; display: inline-block; }
             .sidebar button { display: inline-block; padding: 10px 15px; margin-right: 8px; font-size: 1.2rem; flex-shrink: 0; }
@@ -312,6 +357,14 @@
     </style>
 </head>
 <body>
+
+    <!-- 🎨 THEME SWITCHER 🎨 -->
+    <div class="theme-switcher">
+        <button onclick="setTheme('default')" title="Magical Night">✨</button>
+        <button onclick="setTheme('rose')" title="Rose Petal">🌹</button>
+        <button onclick="setTheme('ocean')" title="Ocean Dream">🌊</button>
+        <button onclick="setTheme('forest')" title="Enchanted Forest">🌲</button>
+    </div>
 
     <!-- OVERLAY FOR FLOWER SHOWER -->
     <div id="flower-container" class="active"></div>
@@ -336,7 +389,7 @@
             <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
             
             <div class="photo-gallery" style="margin-bottom: 25px;">
-                <div class="photo-placeholder" style="width: 220px; height: 260px; border-color: #ff0055; box-shadow: 0 0 30px rgba(255,0,85,0.4);">
+                <div class="photo-placeholder" style="width: 220px; height: 260px; border: 2px solid var(--primary); box-shadow: 0 0 30px var(--glow-color);">
                     <img src="PVGR.png" alt="Amma Welcome Photo" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing PVGR.png';">
                 </div>
             </div>
@@ -392,7 +445,7 @@
         <!-- PAGE 6: Finale -->
         <div id="page6" class="page">
             <h1 style="margin-top: 100px;">The Grand Finale ✨</h1>
-            <p style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: #ffd700;">- Gokul</b></p>
+            <p style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: var(--primary);">- Gokul</b></p>
             <!-- BUTTON HERE ALSO TRIGGERS CELEBRATION -->
             <button class="crazy-btn" onclick="celebrate()">One more time! 🎊</button>
         </div>
@@ -400,6 +453,16 @@
     </div>
 
     <script>
+        // 🎨 THEME SWITCHER LOGIC 🎨
+        function setTheme(themeName) {
+            // Apply the selected theme to the body
+            if (themeName === 'default') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', themeName);
+            }
+        }
+
         // ✨ MAGIC CURSOR EFFECT ✨
         document.addEventListener('mousemove', function(e) {
             createSparkle(e.pageX, e.pageY);
@@ -416,7 +479,7 @@
 
             const sparkle = document.createElement('div');
             sparkle.classList.add('magic-sparkle');
-            const stars = ['✨', '⭐', '💖'];
+            const stars = ['✨', '⭐', '💖', '🌟'];
             sparkle.innerText = stars[Math.floor(Math.random() * stars.length)];
             
             sparkle.style.left = (x - 10 + Math.random() * 20) + 'px';
@@ -440,19 +503,27 @@
             flower.classList.add('flower');
             
             flower.style.left = Math.random() * 100 + 'vw';
-            flower.style.fontSize = (Math.random() * 2 + 1.5) + 'rem'; // Made flowers slightly larger
-            const duration = Math.random() * 2 + 3; // Fast, exciting fall speed
+            flower.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+            const duration = Math.random() * 2 + 3; 
             flower.style.animationDuration = duration + 's';
             
             container.appendChild(flower);
             setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // 🎉 MASTER CELEBRATION FUNCTION (Triggered on click) 🎉
+        // 🎉 MASTER CELEBRATION FUNCTION 🎉
         function celebrate() {
             // 1. Fire Confetti
             var duration = 3000;
             var end = Date.now() + duration;
+
+            // Get current theme colors for confetti if possible, or use standard brights
+            var colors = ['#ffffff', '#ffd700'];
+            var theme = document.body.getAttribute('data-theme');
+            if(theme === 'rose') colors.push('#d81b60');
+            else if(theme === 'ocean') colors.push('#00b4d8');
+            else if(theme === 'forest') colors.push('#40916c');
+            else colors.push('#ff0055');
 
             (function frame() {
                 confetti({
@@ -460,14 +531,14 @@
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
-                    colors: ['#ff0055', '#ffd700', '#ffffff']
+                    colors: colors
                 });
                 confetti({
                     particleCount: 5,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
-                    colors: ['#ff0055', '#ffd700', '#ffffff']
+                    colors: colors
                 });
 
                 if (Date.now() < end) {
@@ -476,10 +547,8 @@
             }());
 
             // 2. Start Flower Shower Burst
-            // Fires a new flower rapidly every 100ms
             let flowerBurst = setInterval(createFlower, 100); 
 
-            // Stops generating new flowers after 4 seconds
             setTimeout(() => {
                 clearInterval(flowerBurst);
             }, 4000);
