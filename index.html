@@ -31,16 +31,32 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Flower Shower Animation */
+        /* ✨ MAGIC CURSOR SPARKLES ✨ */
+        .magic-sparkle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.2rem;
+            animation: magicFade 0.8s forwards;
+            filter: drop-shadow(0 0 8px #ffd700);
+        }
+
+        @keyframes magicFade {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            100% { transform: scale(1.5) rotate(90deg) translateY(-20px); opacity: 0; }
+        }
+
+        /* 🌸 FLOWER SHOWER (Page 1 Only) 🌸 */
         #flower-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            pointer-events: none; /* Lets you click buttons through the flowers */
+            pointer-events: none;
             z-index: 10;
             display: none;
             overflow: hidden;
@@ -63,7 +79,7 @@
             100% { transform: translateY(115vh) rotate(360deg) translateX(50px); }
         }
 
-        /* Glassmorphism Sidebar (Desktop) */
+        /* Glassmorphism Sidebar */
         .sidebar {
             width: 280px;
             background: rgba(255, 255, 255, 0.05);
@@ -88,7 +104,7 @@
             margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            animation: magicalTextGlow 2s ease-in-out infinite alternate;
         }
 
         .sidebar button {
@@ -102,13 +118,16 @@
             transition: all 0.3s ease;
             font-size: 0.95rem;
             font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
 
         .sidebar button:hover, .sidebar button.active-btn {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.4);
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.6);
             color: var(--primary);
             transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         /* Main Content Area */
@@ -128,19 +147,30 @@
             width: 100%;
             max-width: 800px;
             text-align: center;
-            animation: fadeIn 0.6s ease-out forwards;
+            animation: magicalFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .page.active {
             display: block;
         }
 
+        @keyframes magicalFadeIn {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* ✨ MAGICAL GLOWING TEXT ✨ */
         h1 {
             font-family: 'Playfair Display', serif;
             color: var(--primary);
             font-size: 3.5rem;
             margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            animation: magicalTextGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes magicalTextGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2); }
+            100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 0, 85, 0.6), 0 0 40px rgba(255, 0, 85, 0.4); }
         }
 
         p {
@@ -149,28 +179,36 @@
             color: #e0e0e0;
         }
 
-        /* Confetti Button with Glow */
+        /* Magical Button */
         .crazy-btn {
-            background: linear-gradient(45deg, #ff0055, #ff7700);
+            background: linear-gradient(45deg, #ff0055, #ff7700, #ff0055);
+            background-size: 200% auto;
             color: white;
             border: none;
             padding: 15px 35px;
             font-size: 1.2rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
             margin-top: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: 0.5s;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
+            animation: gradientShine 3s linear infinite;
         }
 
         .crazy-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.9);
+            background-position: right center;
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.9);
         }
 
-        /* Photo Placeholders & Image Fitting */
+        @keyframes gradientShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Photo Placeholders */
         .photo-gallery {
             display: flex;
             gap: 20px;
@@ -183,21 +221,23 @@
             width: 250px; 
             height: 300px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 215, 0, 0.4);
+            border: 2px dashed rgba(255, 215, 0, 0.6);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #aaa;
-            transition: transform 0.3s, background 0.3s, border-color 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(5px);
             overflow: hidden; 
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
 
         .photo-placeholder:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.03);
             border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+            border-style: solid;
         }
 
         .photo-placeholder img {
@@ -213,7 +253,7 @@
             border: 12px solid #f4eedc;
             border-radius: 4px;
             background: #e6ddc5;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.6);
             border-bottom: 40px solid #f4eedc; 
         }
 
@@ -222,33 +262,26 @@
             text-align: left;
             font-size: 1.2rem;
             line-height: 2;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
             padding: 30px 50px;
             border-radius: 15px;
             border-left: 4px solid var(--primary);
             display: inline-block;
             margin-top: 20px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: inset 0 0 20px rgba(255,215,0,0.1);
         }
 
         /* Custom Scrollbar for elegance */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.6); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.8); box-shadow: 0 0 10px #ffd700; }
 
         /* =========================================
            MOBILE RESPONSIVENESS RULES
            ========================================= */
         @media screen and (max-width: 768px) {
-            body {
-                flex-direction: column; 
-            }
-
+            body { flex-direction: column; }
             .sidebar {
                 width: 100%;
                 height: auto;
@@ -261,52 +294,15 @@
                 overflow-y: hidden;
                 white-space: nowrap; 
             }
-
-            .sidebar h3 {
-                margin: 0 15px 0 5px;
-                font-size: 1.3rem;
-                display: inline-block;
-            }
-
-            .sidebar button {
-                display: inline-block;
-                padding: 10px 15px;
-                margin-right: 8px;
-                font-size: 0.9rem;
-                flex-shrink: 0; 
-            }
-
-            .sidebar button:hover, .sidebar button.active-btn {
-                transform: none; 
-            }
-
-            .content {
-                padding: 25px 15px;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
-            #page6 h1 {
-                font-size: 2.5rem !important;
-                margin-top: 40px !important;
-            }
-
-            .reasons-list {
-                padding: 20px 25px;
-                font-size: 1rem;
-            }
-
-            .photo-placeholder {
-                width: 100%;
-                max-width: 280px;
-                height: 280px;
-            }
+            .sidebar h3 { margin: 0 15px 0 5px; font-size: 1.3rem; display: inline-block; }
+            .sidebar button { display: inline-block; padding: 10px 15px; margin-right: 8px; font-size: 0.9rem; flex-shrink: 0; }
+            .sidebar button:hover, .sidebar button.active-btn { transform: none; }
+            .content { padding: 25px 15px; }
+            h1 { font-size: 2.2rem; }
+            p { font-size: 1rem; }
+            #page6 h1 { font-size: 2.5rem !important; margin-top: 40px !important; }
+            .reasons-list { padding: 20px 25px; font-size: 1rem; }
+            .photo-placeholder { width: 100%; max-width: 280px; height: 280px; }
         }
     </style>
 </head>
@@ -317,7 +313,7 @@
 
     <!-- SIDEBAR NAVIGATION -->
     <div class="sidebar">
-        <h3>Gokul's Gift</h3>
+        <h3>Gokul's Gift ✨</h3>
         <button id="btn-page1" class="active-btn" onclick="showPage('page1')">1. The Big Welcome</button>
         <button id="btn-page2" onclick="showPage('page2')">2. Surprise</button>
         <button id="btn-page3" onclick="showPage('page3')">3. Memories...📸</button>
@@ -334,9 +330,8 @@
             <h1>HAPPY BIRTHDAY AMMA! 👑</h1>
             <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
             
-            <!-- Added PVGR.png Image -->
             <div class="photo-gallery" style="margin-bottom: 25px;">
-                <div class="photo-placeholder" style="width: 220px; height: 260px; border-color: #ff0055;">
+                <div class="photo-placeholder" style="width: 220px; height: 260px; border-color: #ff0055; box-shadow: 0 0 30px rgba(255,0,85,0.4);">
                     <img src="PVGR.png" alt="Amma Welcome Photo" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing PVGR.png';">
                 </div>
             </div>
@@ -346,7 +341,7 @@
 
         <!-- PAGE 2: Surprise -->
         <div id="page2" class="page">
-            <h1>Surprise</h1>
+            <h1>Surprise ✨</h1>
             <p>Some of the best shots of you. You look like a movie star in these!</p>
             <div class="photo-gallery">
                 <div class="photo-placeholder">
@@ -379,7 +374,7 @@
         
         <!-- PAGE 5: Reasons -->
         <div id="page5" class="page">
-            <h1>Reasons You're the Best</h1>
+            <h1>Reasons You're the Best 💖</h1>
             <ul class="reasons-list">
                 <li>You always support my wild ideas.</li>
                 <li>Your cooking is completely legendary.</li>
@@ -391,41 +386,65 @@
         <!-- PAGE 6: Finale -->
         <div id="page6" class="page">
             <h1 style="font-size: 4rem; margin-top: 100px;">The Grand Finale ✨</h1>
-            <p style="font-size: 1.5rem;">Happy Birthday Mom! I love you so much.<br><br><b>- Gokul</b></p>
+            <p style="font-size: 1.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: #ffd700;">- Gokul</b></p>
             <button class="crazy-btn" onclick="fireConfetti()">One more time! 🎊</button>
         </div>
 
     </div>
 
     <script>
-        let flowerInterval; // Variable to control the flower shower
+        // ✨ MAGIC CURSOR EFFECT ✨
+        document.addEventListener('mousemove', function(e) {
+            createSparkle(e.pageX, e.pageY);
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 0) {
+                createSparkle(e.touches[0].pageX, e.touches[0].pageY);
+            }
+        });
 
-        // Function to create a single falling flower
+        function createSparkle(x, y) {
+            // Don't create too many sparkles at once to keep it smooth
+            if (Math.random() > 0.4) return; 
+
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('magic-sparkle');
+            const stars = ['✨', '⭐', '💖'];
+            sparkle.innerText = stars[Math.floor(Math.random() * stars.length)];
+            
+            // Offset slightly from cursor
+            sparkle.style.left = (x - 10 + Math.random() * 20) + 'px';
+            sparkle.style.top = (y - 10 + Math.random() * 20) + 'px';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 800);
+        }
+
+        // 🌸 FLOWER SHOWER LOGIC 🌸
+        let flowerInterval; 
         function createFlower() {
             const container = document.getElementById('flower-container');
             if (!container || !container.classList.contains('active')) return;
             
             const flower = document.createElement('div');
-            // Array of beautiful emojis for the shower
             const flowers = ['🌸', '🌺', '🌼', '🌻', '🌹', '💮', '✨'];
             flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
             flower.classList.add('flower');
             
-            // Randomize position, size, and speed
             flower.style.left = Math.random() * 100 + 'vw';
             flower.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-            const duration = Math.random() * 3 + 3; // Fall between 3 to 6 seconds
+            const duration = Math.random() * 3 + 4; // Slower, more elegant fall
             flower.style.animationDuration = duration + 's';
             
             container.appendChild(flower);
-            
-            // Clean up flower after it falls off screen
-            setTimeout(() => {
-                flower.remove();
-            }, duration * 1000);
+            setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // Navigation Function
+        // NAVIGATION LOGIC
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
@@ -440,15 +459,13 @@
             document.getElementById(pageId).classList.add('active');
             document.getElementById('btn-' + pageId).classList.add('active-btn');
             
-            // Mobile: Scroll back to top
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
 
-            // FLOWER SHOWER LOGIC: Only show flowers on Page 1
             const flowerContainer = document.getElementById('flower-container');
             if (pageId === 'page1') {
                 flowerContainer.classList.add('active');
                 if (!flowerInterval) {
-                    flowerInterval = setInterval(createFlower, 300); // Create a flower every 300ms
+                    flowerInterval = setInterval(createFlower, 400); 
                 }
             } else {
                 flowerContainer.classList.remove('active');
@@ -457,12 +474,12 @@
             }
         }
 
-        // Start flower shower when the website first loads!
+        // Initialize flowers on load
         window.onload = () => {
-            flowerInterval = setInterval(createFlower, 300);
+            flowerInterval = setInterval(createFlower, 400);
         };
 
-        // Confetti Engine
+        // CONFETTI LOGIC
         function fireConfetti() {
             var duration = 3000;
             var end = Date.now() + duration;
@@ -473,14 +490,14 @@
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffd700']
+                    colors: ['#ff0055', '#ffd700', '#ffffff'] // Magical colors
                 });
                 confetti({
                     particleCount: 5,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffd700']
+                    colors: ['#ff0055', '#ffd700', '#ffffff']
                 });
 
                 if (Date.now() < end) {
