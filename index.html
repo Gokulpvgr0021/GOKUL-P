@@ -8,8 +8,8 @@
     <!-- Importing the Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
-    <!-- Elegant Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Elegant Cursive Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Base Theme Settings */
@@ -17,6 +17,7 @@
             --primary: #ffd700; /* Gold */
             --bg-gradient: linear-gradient(135deg, #1a0b2e 0%, #4b1958 100%);
             --text-light: #f8f9fa;
+            --cursive-font: 'Dancing Script', cursive;
         }
 
         * {
@@ -25,7 +26,7 @@
 
         body {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--cursive-font);
             background: var(--bg-gradient);
             color: var(--text-light);
             display: flex;
@@ -96,14 +97,14 @@
         }
 
         .sidebar h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--cursive-font);
             color: var(--primary);
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             text-align: center;
             margin-top: 0;
             margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            text-transform: none; /* Removed uppercase to keep cursive elegant */
+            letter-spacing: 1px;
             animation: magicalTextGlow 2s ease-in-out infinite alternate;
         }
 
@@ -116,10 +117,11 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem; /* Increased size for cursive readability */
+            font-family: var(--cursive-font);
             position: relative;
             overflow: hidden;
+            font-weight: 600;
         }
 
         .sidebar button:hover, .sidebar button.active-btn {
@@ -161,10 +163,11 @@
 
         /* ✨ MAGICAL GLOWING TEXT ✨ */
         h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--cursive-font);
             color: var(--primary);
-            font-size: 3.5rem;
+            font-size: 4rem; /* Increased size */
             margin-bottom: 10px;
+            font-weight: 700;
             animation: magicalTextGlow 2.5s ease-in-out infinite alternate;
         }
 
@@ -174,8 +177,9 @@
         }
 
         p {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-family: var(--cursive-font);
+            font-size: 1.8rem; /* Increased size */
+            line-height: 1.6;
             color: #e0e0e0;
         }
 
@@ -186,14 +190,14 @@
             color: white;
             border: none;
             padding: 15px 35px;
-            font-size: 1.2rem;
+            font-size: 1.8rem; /* Increased size */
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
             margin-top: 20px;
             transition: 0.5s;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-family: var(--cursive-font);
             animation: gradientShine 3s linear infinite;
         }
 
@@ -260,8 +264,9 @@
         /* Beautiful Lists */
         .reasons-list {
             text-align: left;
-            font-size: 1.2rem;
-            line-height: 2;
+            font-size: 1.8rem; /* Increased size */
+            font-family: var(--cursive-font);
+            line-height: 1.6;
             background: rgba(0,0,0,0.3);
             padding: 30px 50px;
             border-radius: 15px;
@@ -294,14 +299,14 @@
                 overflow-y: hidden;
                 white-space: nowrap; 
             }
-            .sidebar h3 { margin: 0 15px 0 5px; font-size: 1.3rem; display: inline-block; }
-            .sidebar button { display: inline-block; padding: 10px 15px; margin-right: 8px; font-size: 0.9rem; flex-shrink: 0; }
+            .sidebar h3 { margin: 0 15px 0 5px; font-size: 1.8rem; display: inline-block; }
+            .sidebar button { display: inline-block; padding: 10px 15px; margin-right: 8px; font-size: 1.2rem; flex-shrink: 0; }
             .sidebar button:hover, .sidebar button.active-btn { transform: none; }
             .content { padding: 25px 15px; }
-            h1 { font-size: 2.2rem; }
-            p { font-size: 1rem; }
-            #page6 h1 { font-size: 2.5rem !important; margin-top: 40px !important; }
-            .reasons-list { padding: 20px 25px; font-size: 1rem; }
+            h1 { font-size: 3rem; }
+            p { font-size: 1.5rem; }
+            #page6 h1 { font-size: 3.5rem !important; margin-top: 40px !important; }
+            .reasons-list { padding: 20px 25px; font-size: 1.5rem; }
             .photo-placeholder { width: 100%; max-width: 280px; height: 280px; }
         }
     </style>
@@ -325,9 +330,9 @@
     <!-- MAIN CONTENT -->
     <div class="content">
 
-        <!-- PAGE 1: Home (Now with Image & Flowers!) -->
+        <!-- PAGE 1: Home -->
         <div id="page1" class="page active">
-            <h1>HAPPY BIRTHDAY AMMA! 👑</h1>
+            <h1>Happy Birthday Amma! 👑</h1>
             <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
             
             <div class="photo-gallery" style="margin-bottom: 25px;">
@@ -356,7 +361,7 @@
         <!-- PAGE 3: Memories -->
         <div id="page3" class="page">
             <h1>Memories...📸</h1>
-            <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #ccc; font-style: italic;">
+            <p style="color: #ccc;">
                 Taking it back to the golden era. Look at these classic moments!
             </p>
             <div class="photo-gallery">
@@ -379,14 +384,14 @@
                 <li>You always support my wild ideas.</li>
                 <li>Your cooking is completely legendary.</li>
                 <li>You have the patience of a saint (especially with me).</li>
-                <li><i>Add more reasons here...</i></li>
+                <li>Add more reasons here...</li>
             </ul>
         </div>
 
         <!-- PAGE 6: Finale -->
         <div id="page6" class="page">
-            <h1 style="font-size: 4rem; margin-top: 100px;">The Grand Finale ✨</h1>
-            <p style="font-size: 1.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: #ffd700;">- Gokul</b></p>
+            <h1 style="margin-top: 100px;">The Grand Finale ✨</h1>
+            <p style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">Happy Birthday Mom! I love you so much.<br><br><b style="color: #ffd700;">- Gokul</b></p>
             <button class="crazy-btn" onclick="fireConfetti()">One more time! 🎊</button>
         </div>
 
@@ -405,7 +410,6 @@
         });
 
         function createSparkle(x, y) {
-            // Don't create too many sparkles at once to keep it smooth
             if (Math.random() > 0.4) return; 
 
             const sparkle = document.createElement('div');
@@ -413,7 +417,6 @@
             const stars = ['✨', '⭐', '💖'];
             sparkle.innerText = stars[Math.floor(Math.random() * stars.length)];
             
-            // Offset slightly from cursor
             sparkle.style.left = (x - 10 + Math.random() * 20) + 'px';
             sparkle.style.top = (y - 10 + Math.random() * 20) + 'px';
             
@@ -437,7 +440,7 @@
             
             flower.style.left = Math.random() * 100 + 'vw';
             flower.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-            const duration = Math.random() * 3 + 4; // Slower, more elegant fall
+            const duration = Math.random() * 3 + 4; 
             flower.style.animationDuration = duration + 's';
             
             container.appendChild(flower);
@@ -490,7 +493,7 @@
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
-                    colors: ['#ff0055', '#ffd700', '#ffffff'] // Magical colors
+                    colors: ['#ff0055', '#ffd700', '#ffffff']
                 });
                 confetti({
                     particleCount: 5,
