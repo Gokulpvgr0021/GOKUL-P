@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Amma! 🎉</title>
     
+    <!-- Importing the Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
+    <!-- Elegant Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -130,7 +132,7 @@
             box-shadow: 0 0 25px rgba(255, 0, 85, 0.9);
         }
 
-        /* Photo Placeholders */
+        /* Photo Placeholders & Image Fitting */
         .photo-gallery {
             display: flex;
             gap: 20px;
@@ -140,8 +142,8 @@
         }
 
         .photo-placeholder {
-            width: 220px;
-            height: 280px;
+            width: 250px; /* Made slightly wider for better photo display */
+            height: 300px;
             background: rgba(255, 255, 255, 0.05);
             border: 2px dashed rgba(255, 215, 0, 0.4);
             border-radius: 15px;
@@ -149,16 +151,23 @@
             align-items: center;
             justify-content: center;
             color: #aaa;
-            font-style: italic;
             transition: transform 0.3s, background 0.3s;
             backdrop-filter: blur(5px);
+            overflow: hidden; /* This keeps the images inside the rounded borders */
         }
 
         .photo-placeholder:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
             border-color: var(--primary);
-            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* The Magic Image Fitting CSS */
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image fill the box without squishing */
+            display: block;
         }
 
         /* 90s Retro Specific Frame */
@@ -166,7 +175,6 @@
             filter: sepia(0.8) contrast(1.2);
             border: 12px solid #f4eedc;
             border-radius: 4px;
-            color: #666;
             background: #e6ddc5;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
             border-bottom: 40px solid #f4eedc; /* Polaroid style */
@@ -199,6 +207,7 @@
 </head>
 <body>
 
+    <!-- SIDEBAR NAVIGATION -->
     <div class="sidebar">
         <h3>Gokul's Gift</h3>
         <button id="btn-page1" class="active-btn" onclick="showPage('page1')">1. The Big Welcome</button>
@@ -206,50 +215,54 @@
         <button id="btn-page3" onclick="showPage('page3')">3. 90s Retro Memories</button>
         <button id="btn-page4" onclick="showPage('page4')">4. Top Secret Crazy Story</button>
         <button id="btn-page5" onclick="showPage('page5')">5. Reasons I Love You</button>
-        <button id="btn-page6" onclick="showPage('page6')">6. Favorite Food Moments</button>
-        <button id="btn-page7" onclick="showPage('page7')">7. Funny Quotes</button>
-        <button id="btn-page8" onclick="showPage('page8')">8. Family Trips</button>
-        <button id="btn-page9" onclick="showPage('page9')">9. Wisdom You Taught Me</button>
-        <button id="btn-page10" onclick="showPage('page10')">10. Oops, My Bad!</button>
-        <button id="btn-page11" onclick="showPage('page11')">11. Mom's Superpowers</button>
-        <button id="btn-page12" onclick="showPage('page12')">12. Playlist for Mom</button>
-        <button id="btn-page13" onclick="showPage('page13')">13. Future Plans</button>
-        <button id="btn-page14" onclick="showPage('page14')">14. Messages from Friends</button>
         <button id="btn-page15" onclick="showPage('page15')">15. The Grand Finale</button>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="content">
 
+        <!-- PAGE 1: Home -->
         <div id="page1" class="page active">
             <h1>HAPPY BIRTHDAY AMMA! 👑</h1>
             <p>Welcome to your official birthday website. I built this just for you because a simple card wasn't enough!</p>
             <button class="crazy-btn" onclick="fireConfetti()">Click pannu maa! 🎉</button>
         </div>
 
+        <!-- PAGE 2: Cinematic Edits -->
         <div id="page2" class="page">
-            <h1>Wonderfull Memories</h1>
+            <h1>Cinematic Masterpieces</h1>
             <p>Some of the best shots of you. You look like a movie star in these!</p>
             <div class="photo-gallery">
-                <div class="PVGR.png">PVGR</div>
-                <div class="Viji.png">PVGR</div>
+                <!-- Using real image tags now. Replace 'PVGR.png' with your actual file name if different -->
+                <div class="photo-placeholder">
+                    <img src="PVGR.png" alt="Amma 1" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing PVGR.png';">
+                </div>
+                <div class="photo-placeholder">
+                    <img src="Viji.png" alt="Amma 2" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing Viji.png';">
+                </div>
             </div>
         </div>
 
+        <!-- PAGE 3: 90s Retro -->
         <div id="page3" class="page">
-            <h1> Memories 📸</h1>
+            <h1>90s Vintage Memories 📸</h1>
             <p style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #ccc; font-style: italic;">
                 Taking it back to the golden era. Look at these classic moments!
             </p>
             <div class="photo-gallery">
-                <div class="img1.png">PVGR</div>
+                <div class="photo-placeholder retro-photo">
+                    <img src="img1.png" alt="90s Amma" onerror="this.style.display='none'; this.parentNode.innerHTML='Missing img1.png';">
+                </div>
             </div>
         </div>
 
+        <!-- PAGE 4: Crazy Story -->
         <div id="page4" class="page">
             <h1>🤣🤣🤣</h1>
             <p>Remember that time when... (write your funny story here!)</p>
         </div>
         
+        <!-- PAGE 5: Reasons -->
         <div id="page5" class="page">
             <h1>Reasons You're the Best</h1>
             <ul class="reasons-list">
@@ -260,16 +273,10 @@
             </ul>
         </div>
 
-        <div id="page6" class="page"><h1>Favorite Food Moments 🍲</h1><p>Mom's Biryani > Everything else.</p></div>
-        <div id="page7" class="page"><h1>Funny Quotes 💬</h1><p>"Things Mom says when she's mad..."</p></div>
-        <div id="page8" class="page"><h1>Family Trips ✈️</h1><p>Our best vacation memories!</p></div>
-        <div id="page9" class="page"><h1>Wisdom You Taught Me 🧠</h1><p>The life lessons I'll never forget.</p></div>
-        <div id="page10" class="page"><h1>Oops, My Bad! 😅</h1><p>Sorry for all the times I stressed you out!</p></div>
-        <div id="page11" class="page"><h1>Mom's Superpowers 🦸‍♀️</h1><p>Finding things I "lost" 5 seconds ago.</p></div>
-        <div id="page12" class="page"><h1>Playlist for Mom 🎵</h1><p>Your favorite songs.</p></div>
-        <div id="page13" class="page"><h1>Future Plans 🌟</h1><p>Where we are going next.</p></div>
-        <div id="page14" class="page"><h1>Messages from Friends 💌</h1><p>Everyone wishes you a great day!</p></div>
+        <!-- PAGES 6 to 14 -->
+        
 
+        <!-- PAGE 15: Finale -->
         <div id="page15" class="page">
             <h1 style="font-size: 4rem; margin-top: 100px;">The Grand Finale ✨</h1>
             <p style="font-size: 1.5rem;">Happy Birthday Mom! I love you so much.<br><br><b>- Gokul</b></p>
@@ -300,7 +307,7 @@
             document.getElementById('btn-' + pageId).classList.add('active-btn');
         }
 
-        // Crazy Confetti Function! (Now works perfectly with the added script tag in the header)
+        // Crazy Confetti Function
         function fireConfetti() {
             var duration = 3000;
             var end = Date.now() + duration;
